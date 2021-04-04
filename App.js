@@ -1,19 +1,14 @@
 import 'react-native-gesture-handler';
-import React,{ useState, setState, component, useRef } from 'react';
-import { NavigationContainer, useFocusEffect, useIsFocused  } from '@react-navigation/native';
+import React,{ useState } from 'react';
+import { NavigationContainer, useIsFocused  } from '@react-navigation/native';
 // import { createStackNavigator } from '@react-navigation/stack';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'; //can change to bottom-tabs
-import { WebView } from 'react-native-webview';
-// import { createStore } from 'redux';
-// import reducer from './reducers';
-// import { Provider } from 'react-redux';
-import AsyncStorage from '@react-native-community/async-storage';
 
 
 import { StatusBar } from 'expo-status-bar';
 // import React from 'react';
-import { Text, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import Header from './components/Header';
 import LaunchList from './components/LaunchList'
 import FavoritesList from './components/FavoritesList'

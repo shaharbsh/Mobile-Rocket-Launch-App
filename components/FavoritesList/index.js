@@ -13,6 +13,7 @@ const FavoritesList = (props) => {
   
 
     useEffect(() => {
+        // AsyncStorage.clear(); // for testing
         
         AsyncStorage.getAllKeys((err, keys) => {
             AsyncStorage.multiGet(keys, (err, stores) => {
