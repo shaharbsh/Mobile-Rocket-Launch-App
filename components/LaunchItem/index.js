@@ -1,5 +1,5 @@
-import React, { Component, useState, useEffect } from 'react'
-import { Text, View, ImageBackground, Linking, Button } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Text, View, ImageBackground, Linking } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 import { WebView } from 'react-native-webview';
 import styles from './styles'
@@ -9,7 +9,6 @@ import WikiPage from '../WikiPage'
 const LaunchItem = (props) => {
 
     const { id, name, image, window_start, pad, status, rocket } = props.launch
-    let { favorite_lunches, setFavorite_lunches } = props
 
     const url = pad.wiki_url ? pad.wiki_url :  `https://en.wikipedia.org/wiki/ ${rocket.configuration.family}`
 
@@ -17,12 +16,7 @@ const LaunchItem = (props) => {
     const [likeImage, setLikeImage] = useState(require('../LikeButton/like_empty.png'));
 
     const index = name.indexOf('|')
-    const presentName = name.substring(0,index-1)
-
-
-    // console.log('props.launch')
-    // console.log(favorite_lunches)
-    
+    const presentName = name.substring(0,index-1)    
 
     useEffect(() => {
         AsyncStorage.getItem('text', (error, result) => {
@@ -35,10 +29,6 @@ const LaunchItem = (props) => {
   },[]);   
     
     if (active) {
-        // console.log(active)
-        // if (AsyncStorage.getItem(id) === null) {
-          
-        // }
         AsyncStorage.getItem(id, (error, result) => {
           if(error) console.error('Something went wrong!');
           else if(result === null) {
@@ -77,31 +67,7 @@ const LaunchItem = (props) => {
               console.log('Done.')
             }
             removeValue()
-        }
-        // favorite_lunches.push(props.launch)
-        // setFavorite_lunches(favorite_lunches)
-        // console.log(favorite_lunches)
-        
-
-    // } else {
-    //     var array = favorite_lunches; // make a separate copy of the array
-    //     var index; //= array.indexOf(id)
-    //     for (let [i, item] of array.entries()) {
-    //         if (item.id === id) {
-    //             index = i
-    //             break
-    //         }
-    //         else if (i === array.length) {
-    //             index = -1
-    //         }
-    //     }
-    //     if (index !== -1) {
-    //         array.splice(index, 1);
-    //         setFavorite_lunches(array)
-    //     }
-    // }
-
-    
+        }    
     
     return (
         <View style={styles.launchContainer}>

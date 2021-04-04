@@ -1,26 +1,18 @@
-// import React from 'react'
-import React, { Component, useState, useEffect } from 'react';
-import { Text, View, FlatList, Dimensions, Pressable } from 'react-native'
+import React, { useState, useEffect } from 'react';
+import { Text, View, FlatList, Dimensions } from 'react-native'
 import styles from './styles'
 import FavoriteItem from '../FavoriteItem'
 import { useIsFocused } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
-const Favorites = (props) => {
-// function Favorites(props) {
-    
-    // let { favorite_lunches, setFavorite_lunches}  = props
-    const isFocused = useIsFocused()
-    // setFavorite_lunches(favorite_lunches)
-    //console.log(isFocused)
+const FavoritesList = (props) => {
 
+    const isFocused = useIsFocused()
     let [ favorite_lunches, setFavorite_lunches ] = useState([])
   
-    // let favorite_lunches= []
 
     useEffect(() => {
-        // let favorite_lunches= []
         
         AsyncStorage.getAllKeys((err, keys) => {
             AsyncStorage.multiGet(keys, (err, stores) => {
@@ -36,17 +28,11 @@ const Favorites = (props) => {
                 console.log(favorite_lunches)
             });
         });
-        // setFavorite_lunches(favorite_lunches)
         // console.log(fav)
         
     },[isFocused]);   
 
-    // let fav = print()
-    // console.log(fav)
-    // setFavorite_lunches(fav)
-
-      
-    
+    // console.log(fav)    
 
     return (
         <View style={styles.container}>
@@ -65,4 +51,4 @@ const Favorites = (props) => {
 
 
 
-export default Favorites
+export default FavoritesList

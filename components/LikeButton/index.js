@@ -22,7 +22,6 @@ const LikeButton = (props) => {
 
     return (
         <View style={styles.container}>
-            
             <Pressable onPress={likeImage => liked(likeImage)}>
                 <Image style={styles.image} source={likeImage}/>
             </Pressable>

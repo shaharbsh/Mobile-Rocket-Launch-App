@@ -11,7 +11,6 @@ const LoadMoreButton = (props) => {
     const [loadingMore, setLoadingMore] = useState(false);
     const [allLoaded, setAllLoaded] = useState(false);
     const [next10, setNext10] = useState(next);
-    // const [lounchesList, setLounchesList] = useState(launches_Info);
 
     const loadMoreResults = async () => {
 
@@ -20,10 +19,10 @@ const LoadMoreButton = (props) => {
 
         setLoadingMore(true)
         
-        const customData = require("../LaunchList/fake2.json")
+        // const customData = require("../LaunchList/fake2.json")
 
-        // const response = await fetch(next10);
-        // const customData = await response.json();
+        const response = await fetch(next10);
+        const customData = await response.json();
         // console.log('im good');
         
         setNext10(customData.next)

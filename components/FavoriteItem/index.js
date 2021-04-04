@@ -6,8 +6,6 @@ import LikeButton from '../LikeButton'
 const FavoriteItem = (props) => {
 
     const { name, image, date, country, status, url } = props.launch
-
-    // console.log(name + " " + image + " " + date + " " + country + " " + status)
     
     return (
         <View style={styles.launchContainer}>

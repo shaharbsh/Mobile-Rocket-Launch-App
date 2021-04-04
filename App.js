@@ -16,7 +16,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, StyleSheet, View, ActivityIndicator } from 'react-native';
 import Header from './components/Header';
 import LaunchList from './components/LaunchList'
-import Favorites from './components/Favorites'
+import FavoritesList from './components/FavoritesList'
 
 
 const Tab = createMaterialBottomTabNavigator();//createMaterialTopTabNavigator();
@@ -53,7 +53,7 @@ export default function App() {
 
   
   const goFavoriteList = (props) => {
-    return <Favorites favorite_lunches={favorite_lunches} setFavorite_lunches={setFavorite_lunches}/>
+    return <FavoritesList favorite_lunches={favorite_lunches} setFavorite_lunches={setFavorite_lunches}/>
  }
 
   return (
