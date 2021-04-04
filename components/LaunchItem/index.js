@@ -14,38 +14,58 @@ const LaunchItem = (props) => {
     const url = pad.wiki_url ? pad.wiki_url :  `https://en.wikipedia.org/wiki/ ${rocket.configuration.family}`
 
     const [active, setActive] = useState(false);   
+    const [likeImage, setLikeImage] = useState(require('../LikeButton/like_empty.png'));
 
     const index = name.indexOf('|')
     const presentName = name.substring(0,index-1)
 
+
     // console.log('props.launch')
     // console.log(favorite_lunches)
     
+
+    useEffect(() => {
+        AsyncStorage.getItem('text', (error, result) => {
+          if(error) console.error('Something went wrong!');
+          else if(result) {
+            setActive(true)
+            setLikeImage(require('../LikeButton/like_full.png'))
+        }
+      });
+  },[]);   
     
     if (active) {
         // console.log(active)
-        const launchFav = {
-            id: id,
-            name: presentName,
-            image: image,
-            date: window_start,
-            country: pad.location.country_code,
-            status: status.name,
-            url: url
-        } 
-        
-        const storeData = async () => {
-            try {
-                await AsyncStorage.setItem(id, JSON.stringify(launchFav))
-                const currentItem = await AsyncStorage.getItem(id)    
-                // console.log(currentItem)
-            } catch (e) {
-                console.log('err')
-            }
+        // if (AsyncStorage.getItem(id) === null) {
+          
+        // }
+        AsyncStorage.getItem(id, (error, result) => {
+          if(error) console.error('Something went wrong!');
+          else if(result === null) {
+            const launchFav = {
+                id: id,
+                name: presentName,
+                image: image,
+                date: window_start,
+                country: pad.location.country_code,
+                status: status.name,
+                url: url
+            } 
+            const storeData = async () => {
+                try {
+                    await AsyncStorage.setItem(id, JSON.stringify(launchFav))
+                    // const currentItem = await AsyncStorage.getItem(id)    
+                    // console.log(currentItem)
+                } catch (e) {
+                    console.log('err')
+                }
+              }
+              storeData()
+
           }
+        });
     
           
-          storeData()
         } else {
             const removeValue = async () => {
               try {
@@ -98,7 +118,7 @@ const LaunchItem = (props) => {
               status: {status.name}
             </Text>                 
         </View>
-        <LikeButton active={active} setActive={setActive}/>
+        <LikeButton active={active} setActive={setActive} likeImage={likeImage} setLikeImage={setLikeImage}/>
       
       </View>
       
