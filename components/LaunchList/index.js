@@ -4,10 +4,12 @@ import { Text, View, FlatList, Dimensions } from 'react-native'
 import styles from './styles'
 import LaunchItem from '../LaunchItem'
 import LoadMoreButton from '../LoadMoreButton'
+import SearchHeader from '../SearchHeader';
+
 
 const LaunchList = (props) => {
 
-    let { launches_Info, setLaunches_Info, next, favorite_lunches, setFavorite_lunches } = props
+    let { launches_Info, setLaunches_Info, next } = props
     
 
     useEffect(() => {
@@ -18,10 +20,12 @@ const LaunchList = (props) => {
     const [loadingMore, setLoadingMore] = useState(false);
     const [allLoaded, setAllLoaded] = useState(false);
     const [next10, setNext10] = useState(next);
+    const [filterData, setFilterData] = useState(launches_Info);
+    const [isSearching, setIsSearching] = useState(false);
 
     const loadMoreResults = async () => {
 
-        if (loadingMore || allLoaded)
+        if (loadingMore || allLoaded || isSearching)
             return
 
         setLoadingMore(true)
@@ -42,6 +46,7 @@ const LaunchList = (props) => {
 
         setLoadingMore(false)
         setLaunches_Info(launches_Info)
+        setFilterData(launches_Info)
 
         // return <LaunchList launches_Info={launches_Info} next={next10} />
     }
@@ -49,9 +54,10 @@ const LaunchList = (props) => {
 
     return (
         <View style={styles.container}>
+            <SearchHeader setFilterData={setFilterData} launches_Info={launches_Info} setIsSearching={setIsSearching}/>
             <FlatList
-            data={launches_Info}
-            renderItem={({item}) => <LaunchItem launch={item} favorite_lunches={favorite_lunches} setFavorite_lunches={setFavorite_lunches} />}
+            data={filterData}
+            renderItem={({item}) => <LaunchItem launch={item} />}
             showsVerticalScrollIndicator={false}
             snapToAlignment={'start'}
             decelerationRate={'fast'}
@@ -63,8 +69,9 @@ const LaunchList = (props) => {
                   }
                 </View>
               }
+              // from stackoverflow
             initialNumToRender={10}   // how many item to display first
-            onEndReachedThreshold={0.01} // so when you are at 5 pixel from the bottom react run onEndReached function
+            onEndReachedThreshold={0.01} 
             onEndReached={() => { loadMoreResults() }}
             />
             

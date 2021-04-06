@@ -13,8 +13,8 @@ const FavoritesList = (props) => {
   
 
     useEffect(() => {
-        // AsyncStorage.clear(); // for testing
         
+        // https://reactnative.dev/docs/asyncstorage
         AsyncStorage.getAllKeys((err, keys) => {
             AsyncStorage.multiGet(keys, (err, stores) => {
                 let fav = []
@@ -25,13 +25,14 @@ const FavoritesList = (props) => {
                     let jsonValue = value != null ? JSON.parse(value) : null
                     fav.push(jsonValue)
                 });
+
                 setFavorite_lunches(fav)
-                console.log(favorite_lunches)
             });
         });
         // console.log(fav)
         
     },[isFocused]);   
+    // console.log(favorite_lunches)
 
     // console.log(fav)    
 

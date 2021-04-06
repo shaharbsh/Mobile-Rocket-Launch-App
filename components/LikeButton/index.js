@@ -4,11 +4,11 @@ import styles from './styles'
 
 const LikeButton = (props) => {
 
-    const { active, setActive, likeImage, setLikeImage } = props
+    const { active, setActive/*, likeImage, setLikeImage*/ } = props   
     
 
     // const [active, setActive] = useState(false);
-    // const [likeImage, setLikeImage] = useState(require('./like_empty.png'));
+    const [likeImage, setLikeImage] = useState(require('./like_empty.png'));
 
     const liked = () => {
         let icon = !active
