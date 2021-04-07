@@ -1,27 +1,24 @@
-// import React from 'react'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { Text, View, FlatList, Dimensions } from 'react-native'
 import styles from './styles'
 import LaunchItem from '../LaunchItem'
-import LoadMoreButton from '../LoadMoreButton'
-import SearchHeader from '../SearchHeader';
-
+import SearchHeader from '../SearchHeader'
 
 const LaunchList = (props) => {
 
     let { launches_Info, setLaunches_Info, next } = props
     
-
     useEffect(() => {
         console.log('here')
         
     },launches_Info);   
 
-    const [loadingMore, setLoadingMore] = useState(false);
-    const [allLoaded, setAllLoaded] = useState(false);
-    const [next10, setNext10] = useState(next);
-    const [filterData, setFilterData] = useState(launches_Info);
-    const [isSearching, setIsSearching] = useState(false);
+    const [loadingMore, setLoadingMore] = useState(false)
+    const [allLoaded, setAllLoaded] = useState(false)
+    const [next10, setNext10] = useState(next)
+    const [filterData, setFilterData] = useState(launches_Info)
+    const [isSearching, setIsSearching] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
 
     const loadMoreResults = async () => {
 
@@ -32,32 +29,31 @@ const LaunchList = (props) => {
         
         // const customData = require("../LaunchList/fake2.json")
 
-        console.log(next10)
-        const response = await fetch(next10);
-        const customData = await response.json();
+        const response = await fetch(next10)
+        const customData = await response.json()
         
         setNext10(customData.next)
         if (next === null) {
             setAllLoaded(true)
         }
         for (let launch of customData.results){
+            // launch["like"] = false
             launches_Info.push(launch)
         }
 
         setLoadingMore(false)
         setLaunches_Info(launches_Info)
         setFilterData(launches_Info)
-
-        // return <LaunchList launches_Info={launches_Info} next={next10} />
     }
    
 
     return (
         <View style={styles.container}>
-            <SearchHeader setFilterData={setFilterData} launches_Info={launches_Info} setIsSearching={setIsSearching}/>
+            <SearchHeader setFilterData={setFilterData} launches_Info={launches_Info} setIsSearching={setIsSearching}
+            searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
             <FlatList
             data={filterData}
-            renderItem={({item}) => <LaunchItem launch={item} />}
+            renderItem={({item}) => <LaunchItem launch={item} searchQuery={searchQuery} />}
             showsVerticalScrollIndicator={false}
             snapToAlignment={'start'}
             decelerationRate={'fast'}
@@ -68,18 +64,16 @@ const LaunchList = (props) => {
                   : <Text style={styles.footerText}>No More Launches</Text>)
                   }
                 </View>
-              }
-              // from stackoverflow
+            }
+            // from stackoverflow
             initialNumToRender={10}   // how many item to display first
             onEndReachedThreshold={0.01} 
             onEndReached={() => { loadMoreResults() }}
             />
             
         </View>
-      
     )
 }
-
 
 
 export default LaunchList

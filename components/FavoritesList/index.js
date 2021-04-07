@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, FlatList, Dimensions } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, FlatList, Dimensions } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
+import AsyncStorage from '@react-native-community/async-storage'
 import styles from './styles'
 import FavoriteItem from '../FavoriteItem'
-import { useIsFocused } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 
 const FavoritesList = (props) => {
@@ -13,7 +13,6 @@ const FavoritesList = (props) => {
   
 
     useEffect(() => {
-        
         // https://reactnative.dev/docs/asyncstorage
         AsyncStorage.getAllKeys((err, keys) => {
             AsyncStorage.multiGet(keys, (err, stores) => {
@@ -29,12 +28,8 @@ const FavoritesList = (props) => {
                 setFavorite_lunches(fav)
             });
         });
-        // console.log(fav)
         
-    },[isFocused]);   
-    // console.log(favorite_lunches)
-
-    // console.log(fav)    
+    },[isFocused]);      
 
     return (
         <View style={styles.container}>
@@ -47,10 +42,8 @@ const FavoritesList = (props) => {
             snapToInterval={Dimensions.get('window').height}
             />
         </View>
-      
     )
 }
-
 
 
 export default FavoritesList

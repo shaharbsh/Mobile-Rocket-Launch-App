@@ -1,19 +1,15 @@
-import 'react-native-gesture-handler';
-import React,{ useState, useEffect } from 'react';
-import { NavigationContainer, useIsFocused  } from '@react-navigation/native';
+import 'react-native-gesture-handler'
+import React,{ useState, useEffect } from 'react'
+import { NavigationContainer, useIsFocused  } from '@react-navigation/native'
 // import { createStackNavigator } from '@react-navigation/stack';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import AsyncStorage from '@react-native-community/async-storage';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import { StatusBar } from 'expo-status-bar';
 // import React from 'react';
 import { Text, StyleSheet, View } from 'react-native'
-import SearchHeader from './components/SearchHeader'
 import LaunchList from './components/LaunchList'
 import FavoritesList from './components/FavoritesList'
-import Launches from './components/Launches'
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -22,7 +18,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
 
-  AsyncStorage.clear(); // for testing
+  // AsyncStorage.clear(); // for testing
   // initialization of the first 10 launchs:
   let currentPage = "https://ll.thespacedevs.com/2.0.0/launch/previous/"
   
@@ -39,7 +35,7 @@ export default function App() {
     }
     fetchLaunchs()
   }, [])
-
+  
   console.log('hi')
   // console.log(launches_Info)
   let [favorite_lunches, setFavorite_lunches] = useState([])  

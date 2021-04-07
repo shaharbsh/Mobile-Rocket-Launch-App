@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Text, View, ImageBackground, Linking } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage';
-import { WebView } from 'react-native-webview';
+import { Text, View, Image, ImageBackground, Linking, TouchableOpacity } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
+import { WebView } from 'react-native-webview'
 import styles from './styles'
 import LikeButton from '../LikeButton'
 import WikiPage from '../WikiPage'
@@ -10,10 +10,13 @@ const LaunchItem = (props) => {
 
     const { id, name, image, window_start, pad, status, rocket } = props.launch
 
+    const { searchQuery } = props
+
     const url = pad.wiki_url ? pad.wiki_url :  `https://en.wikipedia.org/wiki/ ${rocket.configuration.family}`
 
     const [active, setActive] = useState(false);   
-    // const [likeImage, setLikeImage] = useState(require('../LikeButton/like_empty.png'));
+    const [likeImage, setLikeImage] = useState(require('../LikeButton/like_empty.png'));
+    const [isPress, setIsPress] = useState(false);
 
     const index = name.indexOf('|')
     const presentName = name.substring(0,index-1)    
@@ -27,51 +30,100 @@ const LaunchItem = (props) => {
     //       setLikeImage(require('../LikeButton/like_full.png'))
     //     }
     //   });
-    // });
-          if (active) {
+
+  //   useEffect(() => {
+  //     AsyncStorage.getItem(id, (error, result) => {
+  //       console.log(result)
+  //       if(error) console.error('Something went wrong!');
+  //       else if(result) {
+  //         let value = JSON.parse(result)
+  //         console.log(value.like)
+  //         if (value.like) {
+  //           setActive(true)
+  //           setLikeImage(require('../LikeButton/like_full.png'))
+  //         }
+  //       }
+  //   }, [isPress])
+  // })
+
+  // useEffect(() => {
+  //   const chengeImage = async () => {
+  //     AsyncStorage.getItem(id, (error, result) => {
+  //       console.log(result)
+  //       if(error) console.error('Something went wrong!');
+  //       else if(result) {
+  //         let value = JSON.parse(result)
+  //         console.log(value.like)
+  //         if (value.like) {
+  //           setActive(true)
+  //           setLikeImage(require('../LikeButton/like_full.png'))
+  //         }
+  //       }
+  //     })
+  //   }
+  //   chengeImage()
+  // }, [isPress])
+
+
+      if (active) {
+          AsyncStorage.getItem(id, (error, result) => {
+            if(error) console.error('Something went wrong!');
+            else if(result === null) {
+              const launchFav = {
+                  id: id,
+                  name: presentName,
+                  image: image,
+                  date: window_start,
+                  country: pad.location.country_code,
+                  status: status.name,
+                  url: url,
+                  like: true
+              } 
+              // https://reactnative.dev/docs/asyncstorage
+              const storeData = async () => {
+                  try {
+                      await AsyncStorage.setItem(id, JSON.stringify(launchFav))
+                      // const currentItem = await AsyncStorage.getItem(id)    
+                      // console.log("currentItem")
+                      // console.log(currentItem)
+                  } catch (e) {
+                      console.log('err')
+                  }
+                }
+                storeData()
+  
+            }
+          });
+          } 
+          else {
               AsyncStorage.getItem(id, (error, result) => {
                 if(error) console.error('Something went wrong!');
-                else if(result === null) {
-                  const launchFav = {
-                      id: id,
-                      name: presentName,
-                      image: image,
-                      date: window_start,
-                      country: pad.location.country_code,
-                      status: status.name,
-                      url: url
-                  } 
-                  // https://reactnative.dev/docs/asyncstorage
-                  const storeData = async () => {
-                      try {
-                          await AsyncStorage.setItem(id, JSON.stringify(launchFav))
-                          const currentItem = await AsyncStorage.getItem(id)    
-                          console.log("currentItem")
-                          console.log(currentItem)
-                      } catch (e) {
-                          console.log('err')
-                      }
-                    }
-                    storeData()
-      
-                }
-              });
-              } else {
-                // https://reactnative.dev/docs/asyncstorage
-                  const removeValue = async () => {
-                    try {
-                      await AsyncStorage.removeItem(id)
-                    } catch(e) {
-                      console.log('err')
-                    }
-                  
-                    console.log('Done.')
+                else if(result) {
+                  let value = JSON.parse(result)
+                  console.log("value.like " + value.like)
+                  if (value.like) {
+                    setActive(true)
+                    setLikeImage(require('../LikeButton/like_full.png'))
                   }
-                  removeValue()
+          //         else {
+          //           // https://reactnative.dev/docs/asyncstorage
+          //           const removeValue = async () => {
+          //             try {
+          //               await AsyncStorage.removeItem(id)
+          //             } catch(e) {
+          //               console.log('err')
+          //             }
+                    
+          //             console.log('Done.')
+          //           }
+          //           removeValue()
+          //         }
+          //       }
+          //     })
               }
-    //         } 
-    //     storeFavorite()
-    // }, [active]);       
+            });
+          }
+   
     
     return (
         <View style={styles.launchContainer}>
@@ -88,7 +140,13 @@ const LaunchItem = (props) => {
               status: {status.name}
             </Text>                 
         </View>
-        <LikeButton active={active} setActive={setActive} /*likeImage={likeImage} setLikeImage={setLikeImage}*//>
+        <LikeButton active={active} setActive={setActive} id={id} likeImage={likeImage} setLikeImage={setLikeImage} setIsPress={setIsPress}/>
+        {/* <TouchableOpacity activeOpacity={0.5} onPress={liked()}>
+          <Image
+          source={likeImage}
+          style={styles.ImageIconStyle}
+          />
+      </TouchableOpacity> */}
       
       </View>
       
