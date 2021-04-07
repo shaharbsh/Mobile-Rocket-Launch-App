@@ -37,7 +37,6 @@ const LaunchList = (props) => {
             setAllLoaded(true)
         }
         for (let launch of customData.results){
-            // launch["like"] = false
             launches_Info.push(launch)
         }
 
@@ -53,7 +52,7 @@ const LaunchList = (props) => {
             searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
             <FlatList
             data={filterData}
-            renderItem={({item}) => <LaunchItem launch={item} searchQuery={searchQuery} />}
+            renderItem={({item}) => <LaunchItem launch={item} />}
             showsVerticalScrollIndicator={false}
             snapToAlignment={'start'}
             decelerationRate={'fast'}

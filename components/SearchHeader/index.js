@@ -8,8 +8,6 @@ const SearchHeader = (props) => {
 
     const { setFilterData, launches_Info, setIsSearching, searchQuery, setSearchQuery } = props
 
-    // const [searchQuery, setSearchQuery] = useState('')
-
     const onChangeSearch = (text) => {
         const formattedQuery = text.toLowerCase()
         const searchData = filter(launches_Info, results => {
@@ -30,7 +28,7 @@ const SearchHeader = (props) => {
         const presentName = name.substring(0,index-1)
         const searchName = presentName.toLowerCase()
       
-        if (searchName.length >= 3 && searchName.includes(query)) {
+        if (/*query.length >= 3 &&*/ searchName.includes(query)) {
           return true;
         }
       
@@ -41,7 +39,7 @@ const SearchHeader = (props) => {
         <View style={styles.container}>
             <Searchbar placeholder="Search"
                 onChangeText={onChangeSearch}
-                value={searchQuery} /* style={styles.container} */
+                value={searchQuery}
             />
         </View>
     )
