@@ -18,7 +18,6 @@ const LaunchList = (props) => {
     const [next10, setNext10] = useState(next)
     const [filterData, setFilterData] = useState(launches_Info)
     const [isSearching, setIsSearching] = useState(false)
-    const [searchQuery, setSearchQuery] = useState('')
 
     const loadMoreResults = async () => {
 
@@ -45,11 +44,9 @@ const LaunchList = (props) => {
         setFilterData(launches_Info)
     }
    
-
     return (
         <View style={styles.container}>
-            <SearchHeader setFilterData={setFilterData} launches_Info={launches_Info} setIsSearching={setIsSearching}
-            searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+            <SearchHeader setFilterData={setFilterData} launches_Info={launches_Info} setIsSearching={setIsSearching} />
             <FlatList
             data={filterData}
             renderItem={({item}) => <LaunchItem launch={item} />}

@@ -6,7 +6,9 @@ import styles from './styles'
 
 const SearchHeader = (props) => {
 
-    const { setFilterData, launches_Info, setIsSearching, searchQuery, setSearchQuery } = props
+    const { setFilterData, launches_Info, setIsSearching } = props
+
+    const [searchQuery, setSearchQuery] = useState('')
 
     const onChangeSearch = (text) => {
         const formattedQuery = text.toLowerCase()
