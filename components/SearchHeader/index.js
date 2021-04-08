@@ -18,7 +18,7 @@ const SearchHeader = (props) => {
             } else {
                 setIsSearching(false)
             }
-            return contains(results, formattedQuery)
+            return contains(results, formattedQuery) 
         });
         setFilterData(searchData)
         setSearchQuery(text)
@@ -27,7 +27,7 @@ const SearchHeader = (props) => {
     const contains = ( { name }, query) => {
 
         const index = name.indexOf('|')
-        const presentName = name.substring(0,index-1)
+        const presentName = name.substring(0,index-1) //changing the name of the item from launches_info (like in the LaunchItem component)
         const searchName = presentName.toLowerCase()
       
         if (/*query.length >= 3 &&*/ searchName.includes(query)) {

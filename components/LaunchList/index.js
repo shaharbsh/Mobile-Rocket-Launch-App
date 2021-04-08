@@ -8,25 +8,24 @@ const LaunchList = (props) => {
 
     let { launches_Info, setLaunches_Info, next } = props
     
+    // re-render when array is update
     useEffect(() => {
-        console.log('here')
         
     },launches_Info);   
 
     const [loadingMore, setLoadingMore] = useState(false)
     const [allLoaded, setAllLoaded] = useState(false)
-    const [next10, setNext10] = useState(next)
-    const [filterData, setFilterData] = useState(launches_Info)
+    const [next10, setNext10] = useState(next) // url for the next fetch
+    const [filterData, setFilterData] = useState(launches_Info) // for searching
     const [isSearching, setIsSearching] = useState(false)
 
+    // fetching 10 more items
     const loadMoreResults = async () => {
 
         if (loadingMore || allLoaded || isSearching)
             return
 
         setLoadingMore(true)
-        
-        // const customData = require("../LaunchList/fake2.json")
 
         const response = await fetch(next10)
         const customData = await response.json()
@@ -66,7 +65,6 @@ const LaunchList = (props) => {
             onEndReachedThreshold={0.01} 
             onEndReached={() => { loadMoreResults() }}
             />
-            
         </View>
     )
 }

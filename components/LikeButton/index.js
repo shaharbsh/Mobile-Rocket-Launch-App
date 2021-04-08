@@ -7,10 +7,11 @@ const LikeButton = (props) => {
 
     const { active, setActive, id, likeImage, setLikeImage } = props   
 
+    // when pressing on the icon like - change the icon accordingly
     const liked = () => {
         let icon = !active
         setActive(icon)
-        if (active) {
+        if (active) { // if the like_full icon was pressed we need to remove the item from storage
             setLikeImage(require('./like_empty.png'))
             // https://reactnative.dev/docs/asyncstorage
             const removeValue = async () => {

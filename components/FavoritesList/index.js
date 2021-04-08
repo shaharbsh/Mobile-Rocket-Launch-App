@@ -9,9 +9,9 @@ import FavoriteItem from '../FavoriteItem'
 const FavoritesList = (props) => {
 
     const isFocused = useIsFocused()
-    let [ favorite_lunches, setFavorite_lunches ] = useState([])
+    let [ favorite_lunches, setFavorite_lunches ] = useState([]) // the array that will contain all the favorite launches to display
   
-
+    // each time that entering to the favorite tab, it will get all the items from storage and display it
     useEffect(() => {
         // https://reactnative.dev/docs/asyncstorage
         AsyncStorage.getAllKeys((err, keys) => {

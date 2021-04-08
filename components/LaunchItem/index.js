@@ -8,15 +8,15 @@ const LaunchItem = (props) => {
 
     const { id, name, image, window_start, pad, status, rocket } = props.launch
 
-    const url = pad.wiki_url ? pad.wiki_url :  `https://en.wikipedia.org/wiki/ ${rocket.configuration.family}`
+    const url = pad.wiki_url ? pad.wiki_url :  `https://en.wikipedia.org/wiki/ ${rocket.configuration.family}` // if there is not url then send to the rocket url
 
-    const [active, setActive] = useState(false);   
+    const [active, setActive] = useState(false);   // if favorite button pressed
     const [likeImage, setLikeImage] = useState(require('../LikeButton/like_empty.png'));
 
     const index = name.indexOf('|')
-    const presentName = name.substring(0,index-1)    
+    const presentName = name.substring(0,index-1) // the name without the part after | (this is what I understend for the name)    
 
-      if (active) {
+      if (active) { // if the like button was pressed, add the item to the favorite storage
           AsyncStorage.getItem(id, (error, result) => {
             if(error) console.error('Something went wrong!');
             else if(result === null) {
@@ -43,12 +43,12 @@ const LaunchItem = (props) => {
             }
           });
           } 
-          else {
+          else { // if the item in the favorite storage from previus visit of the item than show like_full icon
               AsyncStorage.getItem(id, (error, result) => {
                 if(error) console.error('Something went wrong!');
                 else if(result) {
                   let value = JSON.parse(result)
-                  if (value.like) {
+                  if (value.like) { 
                     setActive(true)
                     setLikeImage(require('../LikeButton/like_full.png'))
                   }
