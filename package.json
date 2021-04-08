@@ -27,18 +27,19 @@
     "react-native-screens": "^3.0.0",
     "react-native-tab-view": "^3.0.1",
     "react-native-web": "~0.13.12",
-    "react-native-webview": "^11.3.2",
-    "react-navigation": "^4.4.4",
-    "react-test-renderer": "^17.0.2"
+    "react-navigation": "^4.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@testing-library/jest-native": "^4.0.1",
-    "@testing-library/react-native": "^7.2.0"
+    "@testing-library/react-native": "^7.2.0",
+    "react-test-renderer": "^17.0.2"
   },
   "jest": {
     "preset": "react-native",
-    "setupFilesAfterEnv": ["@testing-library/jest-native/extend-expect"]
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ]
   },
   "private": true
 }

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Text, View, Image, ImageBackground, Linking, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { Text, View, ImageBackground, Linking } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
-import { WebView } from 'react-native-webview'
 import styles from './styles'
 import LikeButton from '../LikeButton'
-import WikiPage from '../WikiPage'
 
 const LaunchItem = (props) => {
 
@@ -36,9 +34,6 @@ const LaunchItem = (props) => {
               const storeData = async () => {
                   try {
                       await AsyncStorage.setItem(id, JSON.stringify(launchFav))
-                      // const currentItem = await AsyncStorage.getItem(id)    
-                      // console.log("currentItem")
-                      // console.log(currentItem)
                   } catch (e) {
                       console.log('err')
                   }
@@ -64,12 +59,8 @@ const LaunchItem = (props) => {
     
     return (
         <View style={styles.launchContainer}>
-        <ImageBackground source={{uri: image}}
-        style={styles.image} />
+        <ImageBackground source={{uri: image}} style={styles.image} />
         <View style={styles.titles}>
-        {/* <Text style={styles.name}>{name}</Text> */}
-        {/* <Button title="Go To Wiki" onPress={() => {<WikiPage url={pad.wiki_url}/>}}/> */}
-        {/* <WikiPage url={pad.wiki_url}/> */}
             <Text style={styles.name} onPress={() => Linking.openURL(url)}>{presentName}</Text>
             <Text style={styles.data} onPress={() => Linking.openURL(url)}>
               launch date: {window_start} {'\n'}
@@ -82,5 +73,5 @@ const LaunchItem = (props) => {
       
     )
 }
-
 export default LaunchItem
+
