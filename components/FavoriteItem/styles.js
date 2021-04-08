@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     launchContainer: {
         width: '100%',
-        height: (Dimensions.get('window').height)/2,
+        height: (Dimensions.get('window').height),
       },
       titles: {
         marginTop: '10%',
