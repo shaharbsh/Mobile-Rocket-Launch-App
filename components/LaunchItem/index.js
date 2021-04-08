@@ -62,7 +62,7 @@ const LaunchItem = (props) => {
         <ImageBackground source={{uri: image}} style={styles.image} />
         <View style={styles.titles}>
             <Text style={styles.name} onPress={() => Linking.openURL(url)}>{presentName}</Text>
-            <Text style={styles.data} onPress={() => Linking.openURL(url)}>
+            <Text style={styles.data}>
               launch date: {window_start} {'\n'}
               country: {pad.location.country_code} {'\n'}
               status: {status.name}

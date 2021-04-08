@@ -2,7 +2,7 @@ import 'react-native-gesture-handler'
 import React,{ useState, useEffect } from 'react'
 import { NavigationContainer, useIsFocused  } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
-import AsyncStorage from '@react-native-community/async-storage'
+// import AsyncStorage from '@react-native-community/async-storage'
 
 import { Text, StyleSheet, View } from 'react-native'
 import LaunchList from './components/LaunchList'
@@ -30,8 +30,6 @@ export default function App() {
     }
     fetchLaunchs()
   }, [])
-  
-  console.log('hi')
 
   const goLaunchList = (props) => {
      return <LaunchList launches_Info={launches_Info} setLaunches_Info={setLaunches_Info} next={next} />

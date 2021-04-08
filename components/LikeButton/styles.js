@@ -2,11 +2,9 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
     container: {
-        // padding: 30,
-        paddingVertical: 45,
-        paddingHorizontal: 20,
+        paddingVertical: 50,
+        paddingHorizontal: 30,
         position: 'absolute',
-        //bottom: 0,
         top: 50
       },
       image: {

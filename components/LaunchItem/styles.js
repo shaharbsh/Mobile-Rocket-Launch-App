@@ -3,22 +3,22 @@ import { StyleSheet, Dimensions } from 'react-native'
 const styles = StyleSheet.create({
     launchContainer: {
         width: '100%',
-        height: ((Dimensions.get('window').height)/2),
+        height: ((Dimensions.get('window').height)),
       },
       titles: {
         marginTop: '10%',
         width: '100%',
         alignItems: 'center',
-        backgroundColor: 'rgba(255,255,255,0.4)'
+        backgroundColor: 'rgba(255,255,255,0.6)'
       },
       name: {
-        fontSize: 24,
+        fontSize: 26,
         fontWeight: '500',
         textDecorationLine: 'underline',
         alignItems: 'center',
       },
       data: {
-        fontSize: 16,
+        fontSize: 18,
         color: 'black',
       },
       image: {
